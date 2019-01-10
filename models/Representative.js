@@ -7,7 +7,7 @@ const RepresentativeSchema = new Schema({
 		type: String,
 		required: true
 	},
-	institution_representative: {
+	representative: {
 		type: String,
 		required: true
 	},

@@ -23,7 +23,7 @@ router.post('/register', (req, res) => {
 
 	const newRep = new Representative({
 		institution: req.body.institution, 
-		institution_representative: req.body.institution_representative, 
+		representative: req.body.representative, 
 		email: req.body.email, 
 		contact: req.body.contact, 
 		num_teams: req.body.num_teams, 
