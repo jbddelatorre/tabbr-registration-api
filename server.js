@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 
 const tournaments = require('./routes/api/tournaments');
 const representatives = require('./routes/api/representatives');
+const viewregistration = require('./routes/api/viewregistration');
 
 const app = express();
 
@@ -37,7 +38,8 @@ app.get('/', (req, res) => res.send('hello!!!!'));
 
 //Use Routes
 app.use('/api/tournaments', tournaments);
-app.use('/api/representatives', representatives);
+app.use('/api/registration', representatives);
+app.use('/api/viewregistration', viewregistration);
 
 const port = process.env.PORT || 5000;
 
