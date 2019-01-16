@@ -22,7 +22,7 @@ app.use(function(req, res, next) {
 });
 
 //Body Parser
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({extended: false, useNewUrlParser: true}));
 app.use(bodyParser.json());
 
 //DB Config
@@ -30,7 +30,7 @@ const db = require('./config/keys').mongoURI;
 
 //Connect to MongoDB
 mongoose
-	.connect(db)
+	.connect(db, { useNewUrlParser: true })
 	.then(() => console.log('MongoDB Connected'))
 	.catch(err => console.log(err))
 

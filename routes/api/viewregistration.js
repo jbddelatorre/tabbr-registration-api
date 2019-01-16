@@ -23,7 +23,8 @@ router.post('/', (req, res) => {
 
 router.post('/update', (req, res) => {
 	const { body } = req
-	
+
+	console.log(body)
 	Representative.findOne({ 
 		email: body.email,
 		registration_code: body.registration_code
@@ -36,7 +37,6 @@ router.post('/update', (req, res) => {
 			else return res.status(404).json({errors: "Invalid field input"})
 		})
 		.then(rep => {
-			console.log('here' + rep)
 			if(rep) {
 				Representative.findOneAndUpdate(
 					{
