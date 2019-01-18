@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const tournaments = require('./routes/api/tournaments');
 const representatives = require('./routes/api/representatives');
 const viewregistration = require('./routes/api/viewregistration');
+const signup = require('./routes/api/signup')
 
 const app = express();
 
@@ -40,6 +41,7 @@ app.get('/', (req, res) => res.send('hello!!!!'));
 app.use('/api/tournaments', tournaments);
 app.use('/api/registration', representatives);
 app.use('/api/viewregistration', viewregistration);
+app.use('/api/signup', signup);
 
 const port = process.env.PORT || 5000;
 
