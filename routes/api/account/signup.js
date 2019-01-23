@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 
-const User = require('../../models/User')
+const User = require('../../../models/User')
 
 router.post('/', async (req, res) => {
 	const { body } = req
@@ -28,7 +28,7 @@ router.post('/', async (req, res) => {
 					newUser.password = hash;
 						try {
 							const user = await newUser.save()
-							return res.json(user)
+							return res.json({ success: "Successfully created" })
 						}
 						catch(err) {
 							return res.status(400).json({error: "Invalid Inputs"})
@@ -39,7 +39,7 @@ router.post('/', async (req, res) => {
 	} 
 	catch(err) {
 		console.log(err)
-		return res.status(500).json({error: "Something went wrong."})
+		return res.status(500).json({error: "Something went wrong"})
 	}
 })
 
