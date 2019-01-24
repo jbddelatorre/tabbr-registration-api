@@ -8,15 +8,26 @@ const validateTournamentInput = require('../../validation/tournamentValidation')
 const Tournament = require('../../models/Tournament')
 const User = require('../../models/User')
 
-//Initialize Tournament validation
 
-
-// GET all tournaments - Public
-router.get('/test', (req, res) => res.json({msg: 'Successs'}));
-
+// Route: /api/tournaments
 
 // GET my tournaments - Private
-
+router.get('/:id', passport.authenticate('jwt', {session: false}), (req,res) => {
+	
+	Tournament.find({
+		user: req.params.id
+	})
+		.then(tournaments => {
+			if(tournaments) {
+				return res.json({ tournaments: tournaments })
+			} else {
+				return res.json({ tournaments: [] })
+			}
+		})
+		.catch(err => {
+			return res.status(400).json({error: 'Something went wrong.'})
+		})
+})
 
 // POST create new tournament - Private
 router.post('/new', passport.authenticate('jwt', {session: false}), (req,res) => {
@@ -29,13 +40,12 @@ router.post('/new', passport.authenticate('jwt', {session: false}), (req,res) =>
 
 	User.findOne({ _id: body.user })
 		.then(user => {
-			console.log('HERERHHER')
 			if(!user) {
-				return res.json({error: 'User does not exists'})
+				return res.status(400).json({error: 'User does not exists'})
 			}
 		})
 		.catch(err => {
-			return res.json({ error: 'Invalid user' })
+			return res.status(400).json({ error: 'Invalid user' })
 		})
 
 
@@ -56,7 +66,6 @@ router.post('/new', passport.authenticate('jwt', {session: false}), (req,res) =>
 		.catch(err => {
 			console.log(err)
 		})
-
 })
 
 
